@@ -29,5 +29,3 @@ function main() {
     });
 }
 main();
-//   apollo
-//   MLuha7jf3b6TPwPm
