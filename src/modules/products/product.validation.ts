@@ -21,6 +21,7 @@ const productValidationSchema = z.object({
     tags: z.array(z.string()),
     variants: z.array(TvariantValidationSchema),
     inventory: TinventoryValidationSchema,
+    
 
 
 })
