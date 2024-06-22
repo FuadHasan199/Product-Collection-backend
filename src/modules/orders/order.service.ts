@@ -1,7 +1,7 @@
 import { TOrder } from "./order.interface";
 import { Order } from "./order.model";
 
-export const emailExists = async (email: string) => {
+const emailExists = async (email: string) => {
   try {
     const count = await Order.countDocuments({ email }).exec();
     return count > 0;
@@ -30,4 +30,5 @@ export const OrderService = {
   createOrder,
   getAllOrder,
   getOrderByEmail,
+  emailExists,
 };

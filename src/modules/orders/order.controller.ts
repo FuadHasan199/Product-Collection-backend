@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { emailExists, OrderService } from "./order.service";
+import { OrderService } from "./order.service";
 
 const createOrder = async (req: Request, res: Response) => {
   try {
@@ -40,7 +40,7 @@ const getAllOrderOrEmailBy = async (req: Request, res: Response) => {
         });
       } 
       else if(emailRegex.test(email)){
-        const exists = await emailExists(email)
+        const exists = await OrderService.emailExists(email)
         if(!exists) {
             return res.json({
                 success: false,

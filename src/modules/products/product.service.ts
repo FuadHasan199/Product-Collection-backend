@@ -1,6 +1,23 @@
 import { TProduct } from "./product.interface";
 import { Product } from "./product.model";
 
+const searchProducts = async(searchTerm: string) =>{
+    try {
+        const regex = new RegExp(searchTerm, 'i'); 
+        const result = await Product.find({
+            $or: [
+                { name: regex },
+                { description: regex },
+                { category: regex },
+                { tags: regex }
+            ]
+        }).exec();
+        return result;
+    } catch (error) {
+        console.error('Error searching products:', error);
+        throw error;
+    }
+}
 
 const createProduct = async(payLoad:TProduct) =>{
     const result = await Product.create(payLoad);
@@ -33,4 +50,5 @@ export const ProductServices = {
     getSingleProduct,
     getProductBySlug,
     deleteProduct,
+    searchProducts,
 }
