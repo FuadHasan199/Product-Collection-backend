@@ -8,13 +8,18 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProductController = void 0;
 const product_service_1 = require("./product.service");
+const product_validation_1 = __importDefault(require("./product.validation"));
 const createProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const data = req.body;
-        const result = yield product_service_1.ProductServices.createProduct(data);
+        const zodParsedData = product_validation_1.default.parse(data);
+        const result = yield product_service_1.ProductServices.createProduct(zodParsedData);
         res.json({
             success: true,
             message: 'Product created successfully!',
@@ -52,7 +57,7 @@ const getSingleProduct = (req, res) => __awaiter(void 0, void 0, void 0, functio
         const result = yield product_service_1.ProductServices.getSingleProduct(productId);
         res.json({
             success: true,
-            message: "All product fetched successfully",
+            message: "Product fetched successfully",
             data: result
         });
     }
